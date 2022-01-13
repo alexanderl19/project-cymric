@@ -157,9 +157,7 @@ export class Schedule {
     });
 
     let schedule = await this.storage.get("schedule");
-    session.blockedMessages.push(
-      JSON.stringify({ schedule: JSON.parse(schedule) })
-    );
+    session.blockedMessages.push(schedule);
 
     let receivedUserInfo = false;
     webSocket.addEventListener("message", async (msg) => {
