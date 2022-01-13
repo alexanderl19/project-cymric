@@ -97,6 +97,15 @@ class AppStore extends EventEmitter {
         }
     }
 
+    eventListeners = new Map();
+    addEventListener(listener) {
+        this.eventListeners.set(listener);
+    }
+
+    removeEventListener(listener) {
+        this.eventListeners.delete(listener);
+    }
+
     handleActions(action) {
         switch (action.type) {
             case 'ADD_COURSE':
@@ -220,6 +229,16 @@ class AppStore extends EventEmitter {
             default:
                 console.log(`[Warning] AppStore invalid action type: ${action.type}`);
         }
+        if (
+            action.type == 'ADD_COURSE' ||
+            action.type == 'ADD_SECTION' ||
+            action.type == 'DELETE_COURSE' ||
+            action.type == 'ADD_CUSTOM_EVENT' ||
+            action.type == 'DELETE_CUSTOM_EVENT'
+        )
+            this.eventListeners.forEach((value, key) => {
+                key();
+            });
     }
 }
 
