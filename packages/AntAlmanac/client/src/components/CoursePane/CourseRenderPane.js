@@ -108,7 +108,7 @@ const SectionTableWrapped = (index, data) => {
 
     return (
         <div>
-            {index === 0 ? <AdBanner bannerName={bannerName} bannerLink={bannerLink} /> : null}
+            {/* {index === 0 ? <AdBanner bannerName={bannerName} bannerLink={bannerLink} /> : null} */}
             {component}
         </div>
     );
@@ -147,28 +147,25 @@ class CourseRenderPane extends PureComponent {
 
                 if (response.ok) {
                     const jsonResp = await response.json();
-
-                    const adBannerInfo = await fetch(
-                        `${RANDOM_AD_ENDPOINT}?deptCode=${encodeURIComponent(formData.deptValue)}`
-                    );
-
-                    if (adBannerInfo.ok) {
-                        const jsonAdInfo = await adBannerInfo.json();
-
-                        this.setState({
-                            loading: false,
-                            error: false,
-                            courseData: flattenSOCObject(jsonResp),
-                            bannerName: jsonAdInfo.bannerName,
-                            bannerLink: jsonAdInfo.bannerLink,
-                        });
-                    } else {
-                        this.setState({
-                            loading: false,
-                            error: false,
-                            courseData: flattenSOCObject(jsonResp),
-                        });
-                    }
+                    // const adBannerInfo = await fetch(
+                    //     `${RANDOM_AD_ENDPOINT}?deptCode=${encodeURIComponent(formData.deptValue)}`
+                    // );
+                    // if (adBannerInfo.ok) {
+                    //     const jsonAdInfo = await adBannerInfo.json();
+                    //     this.setState({
+                    //         loading: false,
+                    //         error: false,
+                    //         courseData: flattenSOCObject(jsonResp),
+                    //         bannerName: jsonAdInfo.bannerName,
+                    //         bannerLink: jsonAdInfo.bannerLink,
+                    //     });
+                    // } else {
+                    this.setState({
+                        loading: false,
+                        error: false,
+                        courseData: flattenSOCObject(jsonResp),
+                    });
+                    // }
                 } else {
                     this.setState({
                         loading: false,
